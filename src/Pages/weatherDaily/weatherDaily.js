@@ -3,6 +3,7 @@ import { TextField } from '@mui/material';
 
 import '../../Assets/Styles/weather.scss';
 
+import currentGeoWeatherRequest from '../../api/currentGeoWeatherRequest';
 import apiDaily from '../../api/DailyWeatherRequest';
 import currentWeatherRequest from '../../api/currentWeatherRequest';
 import { debounceHelper } from '../../common/helpers/debounceHelper';
@@ -11,20 +12,50 @@ import WeatherDailyData from '../../Components/weather-daily/WeatherDailyData';
 
 const Weather = () => {
     const [weather, setWeather] = useState({});
-    const [city, setCity] = useState('Warsaw');
+    const [city, setCity] = useState('');
+    const [coord, setCoord] = useState({});
     const [weatherDaily, setWeatherDaily] = useState({});
 
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setCoord(position.coords);
+            },
+            () => {
+                setCity('warsaw');
+            },
+        );
+    }, []);
+
     useEffect(async () => {
-        const response = await currentWeatherRequest(city);
-        setWeather(response);
+        if (coord.latitude && coord.longitude) {
+            const response = await currentGeoWeatherRequest(coord.latitude, coord.longitude);
+            setWeather(response);
+        }
+        if (coord.lat && coord.lon) {
+            const response = await currentGeoWeatherRequest(coord.lat, coord.lon);
+            setWeather(response);
+        }
+    }, [coord]);
+
+    useEffect(async () => {
+        if (city) {
+            const response = await currentWeatherRequest(city);
+            response.coord && setCoord(response.coord);
+            response.message && setWeather(response);
+        }
     }, [city]);
 
     useEffect(async () => {
-        if (weather.coord) {
-            const response = await apiDaily(weather.coord.lat, weather.coord.lon);
+        if (coord.lat && coord.lon) {
+            const response = await apiDaily(coord.lat, coord.lon);
             setWeatherDaily(response);
         }
-    }, [weather]);
+        if (coord.latitude && coord.longitude) {
+            const response = await apiDaily(coord.latitude, coord.longitude);
+            setWeatherDaily(response);
+        }
+    }, [coord]);
 
     const handleCity = (e) => setCity(e?.target?.value);
 

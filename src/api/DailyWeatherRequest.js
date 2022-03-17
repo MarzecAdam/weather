@@ -1,8 +1,8 @@
-import { API_URL } from '../Config/constans';
+import { API_URL, API_KEY, API_UNITS, API_LANG } from '../Config/constans';
 
-const DailyWeatherRequest = async (lat = 52.2298, lon = 21.0118) => {
+const DailyWeatherRequest = async (lat, lon) => {
     const response = await fetch(
-        `${API_URL}onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=metric&appid=8accc89566a8f3e260e2a3f714744670`,
+        `${API_URL}onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=${API_UNITS}&lang=${API_LANG}&appid=${API_KEY}`,
     )
         .then((res) => res.json())
         .catch((e) => console.error(e));

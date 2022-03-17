@@ -3,24 +3,51 @@ import { TextField } from '@mui/material';
 
 import '../../Assets/Styles/weather.scss';
 
-import { debounceHelper } from '../../common/helpers/debounceHelper';
 import currentWeatherRequest from '../../api/currentWeatherRequest';
+import currentGeoWeatherRequest from '../../api/currentGeoWeatherRequest';
+
+import { debounceHelper } from '../../common/helpers/debounceHelper';
 import WeatherData from '../../Components/weather/WeatherData';
 import Map from '../../Components/map/Map';
 
 const Weather = () => {
     const [weather, setWeather] = useState({});
-    const [city, setCity] = useState('Warsaw');
+    const [coord, setCoord] = useState({});
+    const [city, setCity] = useState('');
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setCoord(position.coords);
+            },
+            () => {
+                setCity('warsaw');
+            },
+        );
+    }, []);
+
+    useEffect(async () => {
+        if (coord.latitude && coord.longitude) {
+            const response = await currentGeoWeatherRequest(coord.latitude, coord.longitude);
+            setWeather(response);
+        }
+        if (coord.lat && coord.lon) {
+            const response = await currentGeoWeatherRequest(coord.lat, coord.lon);
+            setWeather(response);
+        }
+    }, [coord]);
+
+    useEffect(async () => {
+        if (city) {
+            const response = await currentWeatherRequest(city);
+            response.coord && setCoord(response.coord);
+            response.message && setWeather(response);
+        }
+    }, [city]);
 
     const handleCity = (e) => {
         setCity(e?.target?.value);
     };
-
-    useEffect(async () => {
-        const response = await currentWeatherRequest(city);
-        setWeather(response);
-    }, [city]);
-
     const handleInputChange = debounceHelper(handleCity, 500);
 
     return (
