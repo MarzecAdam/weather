@@ -1,0 +1,79 @@
+@import '../../Assets/Styles/config';
+
+.daily {
+    width: 100%;
+    &__text {
+        text-align: center;
+        &--title {
+            font-weight: 600;
+            font-size: 3.5em;
+            text-align: center;
+            margin: 1rem;
+        }
+        &--noMargin {
+            margin: 0px;
+        }
+        &--bold {
+            font-weight: bold;
+        }
+    }
+    @media only screen and (min-width: $Large) {
+        display: flex;
+        flex-direction: column;
+        flex: auto;
+        grid-row: 2/4;
+    }
+}
+.table {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 90%;
+    height: 100%;
+    margin: 1rem;
+    border-radius: 0.7rem;
+    &__header {
+        display: flex;
+        flex-direction: row;
+        width: calc(100% - 16px);
+        margin: 0.5rem;
+        border-bottom: $border;
+        & > * {
+            flex: 1 1;
+        }
+        @media only screen and (max-width: $Large) {
+            width: 100%;
+        }
+    }
+    &__body {
+        display: flex;
+        flex-direction: column;
+        height: 90%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    &__row {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin: 0.5rem;
+        border-bottom: $border;
+        & > * {
+            flex: 1 1;
+        }
+    }
+    &__item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+    &__item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+}

@@ -1,0 +1,28 @@
+@import 'config';
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 10vh;
+    padding: 0;
+    &__button {
+        height: 100;
+        width: 100%;
+    }
+    &__link {
+        display: flex;
+        width: 30%;
+        height: 4rem;
+        margin: 0rem 1.5rem;
+        text-decoration: none;
+    }
+    @media only screen and (max-width: $Large) {
+        width: 90%;
+        &__link {
+            margin: 0rem 0.5rem;
+        }
+    }
+}

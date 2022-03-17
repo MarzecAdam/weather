@@ -1,0 +1,28 @@
+@import 'config';
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    min-height: 5vh;
+    width: 100%;
+    background-color: $secondbackgroundcolor;
+    &__text{
+        font-size: 1.25em;
+        margin: 0rem 1rem;
+        text-align: center;
+        &--italic{
+            font-style: italic;
+        }
+        &--bold{
+            font-weight: 500;
+        }
+    }
+    @media only screen and (max-width: $Large) {
+        flex-direction: column;
+        &__text{
+            margin: 0rem;
+        } 
+    }
+}

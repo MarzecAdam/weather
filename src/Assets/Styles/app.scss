@@ -1,0 +1,8 @@
+@import 'config';
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $backgroundcolor;
+}

@@ -1,0 +1,19 @@
+@import 'config';
+
+.notfound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 90vh;
+    &--NoMargin {
+        margin: 0px;
+    }
+    &__text {
+        font-size: 2em;
+    }
+    &__title {
+        font-size: 8em;
+    }
+}
