@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory, useParams } from 'react-router-dom';
 import { TextField } from '@mui/material';
 
 import '../../Assets/Styles/weather.scss';
@@ -6,6 +7,7 @@ import '../../Assets/Styles/weather.scss';
 import currentGeoWeatherRequest from '../../api/currentGeoWeatherRequest';
 import apiDaily from '../../api/DailyWeatherRequest';
 import currentWeatherRequest from '../../api/currentWeatherRequest';
+
 import { debounceHelper } from '../../common/helpers/debounceHelper';
 import Map from '../../Components/map/Map';
 import WeatherDailyData from '../../Components/weather-daily/WeatherDailyData';
@@ -15,26 +17,35 @@ const Weather = () => {
     const [city, setCity] = useState('');
     const [coord, setCoord] = useState({});
     const [weatherDaily, setWeatherDaily] = useState({});
+    const history = useHistory();
+    const localization = useLocation().pathname;
+    const Params = useParams();
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                setCoord(position.coords);
-            },
-            () => {
-                setCity('warsaw');
-            },
-        );
+        if (localization === '/daily' || localization === '/daily/') {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const coord = {
+                        lat: position.coords.latitude,
+                        lon: position.coords.longitude,
+                    };
+                    setCoord(coord);
+                },
+                () => {
+                    setCity('warsaw');
+                },
+            );
+        } else {
+            setCity(`${Params.props}`);
+        }
     }, []);
 
     useEffect(async () => {
-        if (coord.latitude && coord.longitude) {
-            const response = await currentGeoWeatherRequest(coord.latitude, coord.longitude);
-            setWeather(response);
-        }
         if (coord.lat && coord.lon) {
-            const response = await currentGeoWeatherRequest(coord.lat, coord.lon);
+            let response = await currentGeoWeatherRequest(coord.lat, coord.lon);
             setWeather(response);
+            response = await apiDaily(coord.lat, coord.lon);
+            setWeatherDaily(response);
         }
     }, [coord]);
 
@@ -46,20 +57,12 @@ const Weather = () => {
         }
     }, [city]);
 
-    useEffect(async () => {
-        if (coord.lat && coord.lon) {
-            const response = await apiDaily(coord.lat, coord.lon);
-            setWeatherDaily(response);
-        }
-        if (coord.latitude && coord.longitude) {
-            const response = await apiDaily(coord.latitude, coord.longitude);
-            setWeatherDaily(response);
-        }
-    }, [coord]);
+    const handleCity = (e) => {
+        setCity(e?.target?.value);
+        history.push(`/daily/${e?.target?.value}`);
+    };
 
-    const handleCity = (e) => setCity(e?.target?.value);
-
-    const handleInputChange = debounceHelper(handleCity, 500);
+    const handleInputChange = debounceHelper(handleCity, 300);
 
     return (
         <main className="main">
@@ -69,13 +72,11 @@ const Weather = () => {
                 label="enter city"
                 variant="outlined"
                 onChange={handleInputChange}
-                defaultValue={city}
-                error={weather?.message}
+                error={weather?.message > 0}
                 helperText={weather?.message}
-                required
             />
             {weatherDaily.daily && weather.name && <WeatherDailyData name={weather.name} daily={weatherDaily.daily} />}
-            {weather.name && <Map lat={weather.coord.lat} lon={weather.coord.lon} />}
+            {weather.coord && <Map lat={weather.coord.lat} lon={weather.coord.lon} />}
         </main>
     );
 };

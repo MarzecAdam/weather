@@ -8,21 +8,22 @@
     min-height: 5vh;
     width: 100%;
     background-color: $secondbackgroundcolor;
-    &__text{
+    &__text {
         font-size: 1.25em;
         margin: 0rem 1rem;
         text-align: center;
-        &--italic{
+        &--italic {
             font-style: italic;
         }
-        &--bold{
+        &--bold {
             font-weight: 500;
         }
     }
     @media only screen and (max-width: $Large) {
         flex-direction: column;
-        &__text{
+        min-height: 10vh;
+        &__text {
             margin: 0rem;
-        } 
+        }
     }
 }

@@ -7,7 +7,7 @@ import '../../Assets/Styles/home.scss';
 const Home = () => {
     return (
         <main className="home">
-            <h1 className="home__title">Home Page</h1>
+            <h1 className="home__title">Weather Page</h1>
             <div className="home__card">
                 <h2 className="home__subtitle">Current weather</h2>
                 <p className="home__text">
@@ -18,7 +18,7 @@ const Home = () => {
                     interdum id.
                 </p>
                 <Link to="/weather" className="home__link">
-                    <Button className="home__button" variant="outlined">
+                    <Button className="home__button" variant="text">
                         go to the page
                     </Button>
                 </Link>
@@ -33,7 +33,7 @@ const Home = () => {
                     tortor velit, hendrerit vel ullamcorper eget, rhoncus sit amet magna.
                 </p>
                 <Link to="/daily" className="home__link">
-                    <Button className="home__button" variant="outlined">
+                    <Button className="home__button" variant="text">
                         go to the page
                     </Button>
                 </Link>

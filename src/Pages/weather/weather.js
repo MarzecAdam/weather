@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory, useParams } from 'react-router-dom';
 import { TextField } from '@mui/material';
 
 import '../../Assets/Styles/weather.scss';
@@ -14,23 +15,29 @@ const Weather = () => {
     const [weather, setWeather] = useState({});
     const [coord, setCoord] = useState({});
     const [city, setCity] = useState('');
+    const history = useHistory();
+    const localization = useLocation().pathname;
+    const Params = useParams();
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                setCoord(position.coords);
-            },
-            () => {
-                setCity('warsaw');
-            },
-        );
-    }, []);
-
-    useEffect(async () => {
-        if (coord.latitude && coord.longitude) {
-            const response = await currentGeoWeatherRequest(coord.latitude, coord.longitude);
-            setWeather(response);
+        if (localization === '/weather' || localization === '/weather/') {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const coord = {
+                        lat: position.coords.latitude,
+                        lon: position.coords.longitude,
+                    };
+                    setCoord(coord);
+                },
+                () => {
+                    setCity('warsaw');
+                },
+            );
+        } else {
+            setCity(`${Params.props}`);
         }
+    }, []);
+    useEffect(async () => {
         if (coord.lat && coord.lon) {
             const response = await currentGeoWeatherRequest(coord.lat, coord.lon);
             setWeather(response);
@@ -47,8 +54,9 @@ const Weather = () => {
 
     const handleCity = (e) => {
         setCity(e?.target?.value);
+        history.push(`/weather/${e?.target?.value}`);
     };
-    const handleInputChange = debounceHelper(handleCity, 500);
+    const handleInputChange = debounceHelper(handleCity, 300);
 
     return (
         <main className="main">
@@ -58,17 +66,13 @@ const Weather = () => {
                 label="enter city"
                 variant="outlined"
                 onChange={handleInputChange}
-                defaultValue={city}
-                error={weather?.message}
+                error={!!weather?.message}
                 helperText={weather?.message}
-                required={true}
             />
-            {weather.name && (
-                <>
-                    <WeatherData weather={weather} />
-                    <Map lat={weather.coord.lat} lon={weather.coord.lon} />
-                </>
+            {weather.name && weather.sys && weather.main && weather.wind && (
+                <WeatherData name={weather.name} main={weather.main} wind={weather.wind} sys={weather.sys} />
             )}
+            {weather.coord && <Map lat={weather.coord.lat} lon={weather.coord.lon} />}
         </main>
     );
 };

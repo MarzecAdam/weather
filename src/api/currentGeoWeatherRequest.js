@@ -1,4 +1,4 @@
-import { API_URL, API_KEY, API_UNITS, API_LANG } from '../Config/constans';
+import { API_URL, API_KEY, API_UNITS, API_LANG } from '../Config/constants';
 
 const currentWeatherRequest = async (lat, lon) => {
     const response = await fetch(
