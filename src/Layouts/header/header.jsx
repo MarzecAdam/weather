@@ -21,12 +21,12 @@ const Header = () => {
             </Link>
             <Link to="/weather" className="header__link">
                 <Button className="header__button" variant={location('/weather')}>
-                    Weather
+                    Current Weather
                 </Button>
             </Link>
             <Link to="/daily" className="header__link">
                 <Button className="header__button" variant={location('/daily')}>
-                    Weather Daliy
+                    Weather forecast
                 </Button>
             </Link>
         </nav>

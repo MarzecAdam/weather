@@ -14,12 +14,9 @@ const route = () => {
             <Header />
             <Switch>
                 <Route exact path="/home" component={Home}></Route>
-                <Route exact path="/weather/" component={Weather}></Route>
-                <Route path="/weather/:props" component={Weather}></Route>
-                <Route exact path="/daily" component={WeatherDaily}></Route>
-                <Route exact path="/daily/:props" component={WeatherDaily}></Route>
+                <Route path="/weather/:props?" component={Weather}></Route>
+                <Route exact path="/daily/:props?" component={WeatherDaily}></Route>
                 <Route exact path="/not_found" component={NotFound}></Route>
-
                 <Redirect exact path="/" to="/home" />
                 <Redirect to="/not_found" />
             </Switch>

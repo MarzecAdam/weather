@@ -24,7 +24,7 @@ const Home = () => {
                 </Link>
             </div>
             <div className="home__card">
-                <h2 className="home__subtitle">Daily weather</h2>
+                <h2 className="home__subtitle">weather forecast</h2>
                 <p className="home__text">
                     Sed at lorem lectus. Fusce lacus sem, tincidunt iaculis tincidunt id, laoreet rutrum metus. Integer
                     quis suscipit nunc. Nulla commodo nunc a maximus convallis. Fusce nec diam rutrum, aliquam nibh et,

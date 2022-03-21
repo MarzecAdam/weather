@@ -65,6 +65,7 @@ const Weather = () => {
                 id="outlined-basic"
                 label="enter city"
                 variant="outlined"
+                Validate
                 onChange={handleInputChange}
                 error={!!weather?.message}
                 helperText={weather?.message}

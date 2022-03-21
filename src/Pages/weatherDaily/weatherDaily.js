@@ -72,7 +72,7 @@ const Weather = () => {
                 label="enter city"
                 variant="outlined"
                 onChange={handleInputChange}
-                error={weather?.message > 0}
+                error={!!weather?.message}
                 helperText={weather?.message}
             />
             {weatherDaily.daily && weather.name && <WeatherDailyData name={weather.name} daily={weatherDaily.daily} />}
