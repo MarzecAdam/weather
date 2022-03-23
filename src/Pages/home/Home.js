@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 import '../../Assets/Styles/home.scss';
 
+import { useTitle } from '../../common/hooks/useTitle';
+
 const Home = () => {
+    useTitle();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <main className="home">
             <h1 className="home__title">Weather Page</h1>
-            <div className="home__card">
+            <div className="home__card" id="card__current">
                 <h2 className="home__subtitle">Current weather</h2>
                 <p className="home__text">
                     Cras eget volutpat turpis. Nulla dignissim vitae nisl nec varius. Suspendisse nec purus suscipit,
@@ -23,7 +31,7 @@ const Home = () => {
                     </Button>
                 </Link>
             </div>
-            <div className="home__card">
+            <div className="home__card" id="card__daily">
                 <h2 className="home__subtitle">weather forecast</h2>
                 <p className="home__text">
                     Sed at lorem lectus. Fusce lacus sem, tincidunt iaculis tincidunt id, laoreet rutrum metus. Integer

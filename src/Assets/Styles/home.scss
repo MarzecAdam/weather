@@ -12,8 +12,8 @@
         text-align: center;
     }
     &__card {
-        display: grid;
-        grid-template-rows: auto max(75%);
+        display: flex;
+        flex-direction: column;
         border: $border;
         border-radius: 1rem;
         margin: 0rem 1rem 2rem 1rem;
@@ -21,14 +21,8 @@
     }
     &__subtitle {
         font-size: 2em;
-        grid-column: 1;
-        grid-row: 1;
         margin: 0;
         text-align: center;
-    }
-    &__text {
-        grid-column: 1;
-        grid-row: 2;
     }
     &__link {
         display: flex;
@@ -37,8 +31,6 @@
         text-decoration: none;
         height: 100%;
         width: 100%;
-        grid-column: 2;
-        grid-row: 1/3;
     }
     &__button {
         width: 100%;
@@ -49,23 +41,11 @@
         &__card {
             display: flex;
             flex-direction: column;
-            grid-template-columns: none;
-            grid-template-rows: none;
             padding: 1rem;
         }
-        &__link {
-            grid-column: none;
-            grid-row: none;
-        }
         &__text {
-            grid-column: none;
-            grid-row: none;
-            text-align:justify;
+            text-align: justify;
             margin: 1rem 2rem;
-        }
-        &__subtitle {
-            grid-column: none;
-            grid-row: none;
         }
     }
 }

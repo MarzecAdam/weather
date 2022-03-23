@@ -7,6 +7,7 @@ import '../../Assets/Styles/weather.scss';
 import currentWeatherRequest from '../../api/currentWeatherRequest';
 import currentGeoWeatherRequest from '../../api/currentGeoWeatherRequest';
 
+import { useTitle } from '../../common/hooks/useTitle';
 import { debounceHelper } from '../../common/helpers/debounceHelper';
 import WeatherData from '../../Components/weather/WeatherData';
 import Map from '../../Components/map/Map';
@@ -18,6 +19,12 @@ const Weather = () => {
     const history = useHistory();
     const localization = useLocation().pathname;
     const Params = useParams();
+
+    useTitle('Current weather');
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         if (localization === '/weather' || localization === '/weather/') {
@@ -63,9 +70,8 @@ const Weather = () => {
             <TextField
                 className="main__searchbox"
                 id="outlined-basic"
-                label="enter city"
+                label="Find a city"
                 variant="outlined"
-                Validate
                 onChange={handleInputChange}
                 error={!!weather?.message}
                 helperText={weather?.message}

@@ -8,6 +8,7 @@ import currentGeoWeatherRequest from '../../api/currentGeoWeatherRequest';
 import apiDaily from '../../api/DailyWeatherRequest';
 import currentWeatherRequest from '../../api/currentWeatherRequest';
 
+import { useTitle } from '../../common/hooks/useTitle';
 import { debounceHelper } from '../../common/helpers/debounceHelper';
 import Map from '../../Components/map/Map';
 import WeatherDailyData from '../../Components/weather-daily/WeatherDailyData';
@@ -20,6 +21,12 @@ const Weather = () => {
     const history = useHistory();
     const localization = useLocation().pathname;
     const Params = useParams();
+
+    useTitle('Weather Forecast');
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         if (localization === '/daily' || localization === '/daily/') {
@@ -69,7 +76,7 @@ const Weather = () => {
             <TextField
                 className="main__searchbox"
                 id="outlined-basic"
-                label="enter city"
+                label="Find a city"
                 variant="outlined"
                 onChange={handleInputChange}
                 error={!!weather?.message}

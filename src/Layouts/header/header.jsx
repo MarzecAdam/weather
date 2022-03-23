@@ -1,31 +1,26 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 import '../../Assets/Styles/header.scss';
 
+import useNavPath from '../../common/hooks/useNavPath'
+
 const Header = () => {
-    const location = (props) => {
-        if (useLocation().pathname === props) {
-            return 'contained';
-        } else {
-            return 'outlined';
-        };
-    };
     return (
         <nav className="header">
-            <Link to="/home" className="header__link">
-                <Button className="header__button" variant={location('/home')}>
+            <Link to="/home" className="header__link" tabIndex="-1">
+                <Button className="header__button" variant={useNavPath('/home')}>
                     Home Page
                 </Button>
             </Link>
-            <Link to="/weather" className="header__link">
-                <Button className="header__button" variant={location('/weather')}>
+            <Link to="/weather" className="header__link" tabIndex="-1">
+                <Button className="header__button" variant={useNavPath('/weather')}>
                     Current Weather
                 </Button>
             </Link>
-            <Link to="/daily" className="header__link">
-                <Button className="header__button" variant={location('/daily')}>
+            <Link to="/daily" className="header__link" tabIndex="-1">
+                <Button className="header__button" variant={useNavPath('/daily')}>
                     Weather forecast
                 </Button>
             </Link>
