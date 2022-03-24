@@ -5,22 +5,23 @@ import Button from '@mui/material/Button';
 import '../../Assets/Styles/header.scss';
 
 import useNavPath from '../../common/hooks/useNavPath'
+import { HOME_PAGE, CURRENT_WEATHER_PAGE, DAILY_FORECAST_PAGE } from '../../Config/constants';
 
 const Header = () => {
     return (
         <nav className="header">
-            <Link to="/home" className="header__link" tabIndex="-1">
-                <Button className="header__button" variant={useNavPath('/home')}>
+            <Link to={HOME_PAGE} className="header__link" tabIndex="-1">
+                <Button className="header__button" variant={useNavPath(HOME_PAGE)}>
                     Home Page
                 </Button>
             </Link>
-            <Link to="/weather" className="header__link" tabIndex="-1">
-                <Button className="header__button" variant={useNavPath('/weather')}>
+            <Link to={CURRENT_WEATHER_PAGE} className="header__link" tabIndex="-1">
+                <Button className="header__button" variant={useNavPath(CURRENT_WEATHER_PAGE)}>
                     Current Weather
                 </Button>
             </Link>
-            <Link to="/daily" className="header__link" tabIndex="-1">
-                <Button className="header__button" variant={useNavPath('/daily')}>
+            <Link to={DAILY_FORECAST_PAGE} className="header__link" tabIndex="-1">
+                <Button className="header__button" variant={useNavPath(DAILY_FORECAST_PAGE)}>
                     Weather forecast
                 </Button>
             </Link>

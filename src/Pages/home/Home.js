@@ -6,6 +6,8 @@ import '../../Assets/Styles/home.scss';
 
 import { useTitle } from '../../common/hooks/useTitle';
 
+import { CURRENT_WEATHER_PAGE, DAILY_FORECAST_PAGE } from '../../Config/constants';
+
 const Home = () => {
     useTitle();
 
@@ -25,7 +27,7 @@ const Home = () => {
                     mattis eget massa et, convallis feugiat urna. Sed bibendum finibus justo, feugiat vulputate arcu
                     interdum id.
                 </p>
-                <Link to="/weather" className="home__link">
+                <Link to={CURRENT_WEATHER_PAGE} className="home__link">
                     <Button className="home__button" variant="text">
                         go to the page
                     </Button>
@@ -40,7 +42,7 @@ const Home = () => {
                     id condimentum. Quisque id urna dui. Donec cursus tellus nulla, vel vestibulum ex sagittis vel. Nunc
                     tortor velit, hendrerit vel ullamcorper eget, rhoncus sit amet magna.
                 </p>
-                <Link to="/daily" className="home__link">
+                <Link to={DAILY_FORECAST_PAGE} className="home__link">
                     <Button className="home__button" variant="text">
                         go to the page
                     </Button>
