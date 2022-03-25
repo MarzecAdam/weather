@@ -4,7 +4,7 @@ import '../../Assets/Styles/notfound.scss';
 
 import { useTitle } from '../../common/hooks/useTitle';
 
-const NotFound = () => {
+export const NotFound = () => {
     useTitle('Not Found');
 
     useEffect(() => {
@@ -18,5 +18,3 @@ const NotFound = () => {
         </main>
     );
 };
-
-export default NotFound;

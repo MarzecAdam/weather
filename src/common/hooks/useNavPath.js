@@ -1,7 +1,8 @@
 import { useLocation } from 'react-router-dom';
 
 const useNavPath = (props) => {
-    if (useLocation().pathname === props) {
+    const localization = useLocation()
+    if (localization.pathname === props) {
         return 'contained';
     } else {
         return 'outlined';

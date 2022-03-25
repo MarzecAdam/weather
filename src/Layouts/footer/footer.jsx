@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../../Assets/Styles/footer.scss';
 
-const Footer = () => {
+export const Footer = () => {
     return (
         <footer className="footer">
             <p className="footer__text footer__text--italic">
@@ -12,5 +12,3 @@ const Footer = () => {
         </footer>
     );
 };
-
-export default Footer;
