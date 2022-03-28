@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import route from './Routes/route';
 import reportWebVitals from './reportWebVitals';
+import { MainContainer } from './Layouts/main';
 
 import './Assets/Styles/app.scss';
 
 ReactDOM.render(
     <React.StrictMode>
-        <div className="mainContainer">{route()}</div>
+        <MainContainer />
     </React.StrictMode>,
     document.getElementById('root'),
 );

@@ -3,7 +3,7 @@ import React from 'react';
 import { Footer } from '../../../Layouts/footer/footer';
 
 export default {
-    title: 'weather/Footer',
+    title: 'weather/layout/Footer',
     component: Footer,
     parameters: {
         layout: 'fullscreen',
